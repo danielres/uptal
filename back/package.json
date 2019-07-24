@@ -1,0 +1,17 @@
+{
+  "name": "generators",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Daniel Reszka <dannn.r@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
