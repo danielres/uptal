@@ -5,8 +5,8 @@ const io = require("socket.io")(http);
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 io.on("connection", socket => {
-  socket.on("chat message", msg => {
-    console.log("messsage:", msg);
+  socket.on("chat message", ({ author, text }) => {
+    const msg = { author, text, createdAt: new Date().toISOString() };
     io.emit("chat message", msg);
   });
   console.log("a user connected");

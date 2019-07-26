@@ -1,11 +1,12 @@
 <script>
-  export let name;
+  import Chat from "./Chat/Chat.svelte";
+  import UserForm from "./UserForm.svelte";
+
+  let user;
 </script>
 
-<style>
-  h1 {
-    color: purple;
-  }
-</style>
-
-<h1>Hello {name}!</h1>
+{#if user}
+  <Chat {user} />
+{:else}
+  <UserForm bind:user />
+{/if}
