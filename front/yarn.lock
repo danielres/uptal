@@ -1342,6 +1342,10 @@ rollup-plugin-node-resolve@^5.2.0:
     resolve "^1.11.1"
     rollup-pluginutils "^2.8.1"
 
+rollup-plugin-root-import@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-root-import/-/rollup-plugin-root-import-0.2.4.tgz#a743d7a3e0d700a783c72cec95fa815ac1ef25f9"
+
 rollup-plugin-svelte@^5.0.3:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-5.1.0.tgz#6c2d3998db9141a934343a0e7298499994aadd25"

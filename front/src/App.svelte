@@ -1,6 +1,6 @@
 <script>
-  import Chat from "./Chat/Chat.svelte";
-  import UserForm from "./UserForm.svelte";
+  import Chat from "/Chat/Chat.svelte";
+  import UserForm from "/UserForm.svelte";
 
   let user;
 </script>

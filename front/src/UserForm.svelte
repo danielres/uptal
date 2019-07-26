@@ -1,6 +1,6 @@
 <script>
   import yup from "yup";
-  import Field from "./forms/Field.svelte";
+  import Field from "/forms/Field.svelte";
 
   export let user;
 
