@@ -5,8 +5,19 @@
   let user;
 </script>
 
-{#if user}
-  <Chat {user} />
-{:else}
-  <UserForm bind:user />
-{/if}
+<style lang="postcss">
+  .main {
+    @apply p-8;
+  }
+</style>
+
+<div class="container mx-auto h-screen bg-gray-200">
+
+  <div class="main">
+    {#if user}
+      <Chat {user} />
+    {:else}
+      <UserForm bind:user />
+    {/if}
+  </div>
+</div>
