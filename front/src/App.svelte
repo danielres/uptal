@@ -1,6 +1,7 @@
 <script>
   import Chat from "/Chat/Chat.svelte";
   import UserForm from "/UserForm.svelte";
+  import Header from "/Header.svelte";
 
   let user;
 </script>
@@ -12,6 +13,7 @@
 </style>
 
 <div class="container mx-auto h-screen bg-gray-200">
+  <Header />
 
   <div class="main">
     {#if user}
