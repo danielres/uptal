@@ -1,25 +1,26 @@
 <script>
-  import Chat from "/Chat/Chat.svelte";
-  import UserForm from "/UserForm.svelte";
-  import Header from "/Header.svelte";
+  import Chat from '/Chat/Chat.svelte';
+  import Header from '/Header.svelte';
+  import UserForm from '/UserForm.svelte';
 
-  let user;
+  let user; //= { age: 18, userName: 'dannnn' };
 </script>
 
 <style lang="postcss">
-  .main {
-    @apply p-8;
+  :global(body) {
+    @apply bg-gray-200;
   }
 </style>
 
-<div class="container mx-auto h-screen bg-gray-200">
-  <Header />
+<div class="container mx-auto">
+  {#if user}
+    <Header />
+    <Chat {user} />
+  {/if}
 
-  <div class="main">
-    {#if user}
-      <Chat {user} />
-    {:else}
+  {#if !user}
+    <div class="my-20">
       <UserForm bind:user />
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>

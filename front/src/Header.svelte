@@ -1,7 +1,6 @@
 <style lang="postcss">
   header {
-    @apply p-8;
-    @apply bg-blue-500 text-white;
+    @apply p-8 bg-blue-500 text-white;
   }
 </style>
 

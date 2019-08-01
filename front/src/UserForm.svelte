@@ -1,6 +1,6 @@
 <script>
-  import yup from "yup";
-  import Field from "/forms/Field.svelte";
+  import yup from 'yup';
+  import Field from '/forms/Field.svelte';
 
   export let user;
 
@@ -10,13 +10,13 @@
   const schema = yup.object().shape({
     userName: yup
       .string()
-      .required("required")
-      .min(3, "Should be at least ${min} characters"),
+      .required('required')
+      .min(3, 'Should be at least ${min} characters'),
     age: yup
       .number()
-      .required("required")
-      .min(18, "You must be at least ${min} years old.")
-      .typeError("invalid number")
+      .required('required')
+      .min(18, 'You must be at least ${min} years old.')
+      .typeError('invalid number')
   });
 
   let values = {};
@@ -38,20 +38,20 @@
   const handleSubmit = async () => (user = await validate());
 </script>
 
-<style>
-  button:disabled {
-    opacity: 0.5;
-  }
-</style>
+<div class="card border">
+  <form on:submit|preventDefault={handleSubmit}>
+    <Field
+      class="mb-4"
+      bind:value={values.userName}
+      errors={errors.userName}
+      placeholder="Please choose a username" />
 
-<form on:submit|preventDefault={handleSubmit}>
-  <Field
-    bind:value={values.userName}
-    errors={errors.userName}
-    placeholder="Please choose a username" />
+    <Field
+      class="mb-4"
+      bind:value={values.age}
+      errors={errors.age}
+      placeholder="Your age?" />
 
-  <Field bind:value={values.age} errors={errors.age} placeholder="Your age?" />
-
-  <button disabled={!isFormValid}>Submit</button>
-
-</form>
+    <button disabled={!isFormValid}>Submit</button>
+  </form>
+</div>
