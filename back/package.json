@@ -5,7 +5,12 @@
   "author": "Daniel Reszka <dannn.r@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "yarn e:dev nodemon src/index.js",
+    "docker:up": "yarn e:dev docker-compose up",
+    "docker:reset": "docker-compose down && docker-compose rm -f",
+    "docker:stop:all": "docker stop $(docker ps -aq)",
+    "e:dev": "dotenv -e .env.local -e .env",
+    "e:test": "dotenv -e .env.test.local -e .env.test -e .env.local -e .env"
   },
   "dependencies": {
     "apollo-server-express": "^2.8.1",
@@ -14,6 +19,7 @@
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
+    "dotenv-cli": "^2.0.1",
     "nodemon": "^1.19.1"
   }
 }
