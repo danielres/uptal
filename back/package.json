@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "yarn e:dev yarn start:watch",
     "start:watch": "nodemon --watch src --ext js,graphql --exec babel-node src/",
+    "db:seed": "yarn e:dev babel-node src/seed/",
     "docker:up": "yarn e:dev docker-compose up",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:stop:all": "docker stop $(docker ps -aq)",
