@@ -1,0 +1,18 @@
+type User {
+  id: ID!
+  name: String
+  taggings: [UserTagging]
+}
+
+type Tag {
+  id: ID!
+  name: String
+  description: String
+  taggings: [UserTagging]
+}
+
+type UserTagging @relation(name: "USER_TAGGING") {
+  from: Tag
+  to: User
+  text: String
+}
