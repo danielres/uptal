@@ -32,6 +32,19 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "dotenv-cli": "^2.0.1",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1",
     "nodemon": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,graphql": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
