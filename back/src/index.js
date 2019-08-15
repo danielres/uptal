@@ -3,16 +3,9 @@ import http from "http";
 import socketIo from "socket.io";
 import { ApolloServer } from "apollo-server-express";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
-import { v1 as neo4j } from "neo4j-driver";
 
 import { typeDefs } from "./graphql/schema";
-
-// setup neo4j driver
-const { NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD } = process.env;
-const neo4jDriver = neo4j.driver(
-  NEO4J_URI,
-  neo4j.auth.basic(NEO4J_USER, NEO4J_PASSWORD)
-);
+import neo4jDriver from "./helpers/neo4j/driver";
 
 // create graphql schema
 const schema = makeAugmentedSchema({ typeDefs });
