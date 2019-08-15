@@ -8,6 +8,8 @@
     "dev": "yarn e:dev yarn start:watch",
     "start:watch": "nodemon --watch src --ext js,graphql --exec babel-node src/",
     "db:seed": "yarn e:dev babel-node src/seed/",
+    "db:migrate": "yarn e:dev node src/helpers/neo4j/migrate.js",
+    "db:rollback": "yarn e:dev node src/helpers/neo4j/migrate.js down",
     "docker:up": "yarn e:dev docker-compose up",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:stop:all": "docker stop $(docker ps -aq)",
