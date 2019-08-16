@@ -4032,6 +4032,10 @@ static-extend@^0.1.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
 
+stoppable@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/stoppable/-/stoppable-1.1.0.tgz#32da568e83ea488b08e4d7ea2c3bcc9d75015d5b"
+
 streamsearch@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"
