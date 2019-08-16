@@ -1,3 +1,4 @@
 node_modules
 **/migrations/meta.*.json
 **/seeds/meta.*.json
+build
