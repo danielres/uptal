@@ -1,6 +1,6 @@
 const log = (...args) => console.log(...args);
 
-const h = str => log(`=== ${str} `.padEnd(50, "="));
+const h = str => log("\n" + `=== ${str} `.padEnd(50, "="));
 
 const hr = () => log("".padEnd(50, "="));
 
