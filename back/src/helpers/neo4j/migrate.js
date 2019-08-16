@@ -1,24 +1,28 @@
 const Umzug = require("umzug");
 
 const command = process.argv[2] || "up";
+const path = "neo4j/migrations";
+
 const umzug = new Umzug({
+  migrations: { path },
   storage: "json",
-  storageOptions: { path: "migrations/meta.json" }
+  storageOptions: { path: `${path}/meta.json` }
 });
 
-const printLog = title => migrations => {
-  if (!migrations.length) return console.log("No migrations to run");
+const h = str => `=== ${str} `.padEnd(50, "=");
 
-  console.log("=========================");
-  console.log(title);
-  console.log(migrations.map(m => `- ${m.file}`).join("\n"));
-  console.log("=========================");
+const printLog = title => migrations => {
+  if (!migrations.length) return console.log(h("No migrations to run"));
+
+  console.log(h(title));
+  console.log(migrations.map(m => m.file).join("\n"));
+  console.log("".padEnd(50, "="));
 };
 
 switch (command) {
   case "up":
-    umzug.up().then(printLog("Ran migrations:"));
+    return umzug.up().then(printLog("Applied migrations:"));
 
   case "down":
-    umzug.down().then(printLog("Rolled back migrations:"));
+    return umzug.down().then(printLog("Rolled back migrations:"));
 }
