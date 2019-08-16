@@ -33,11 +33,20 @@ io.on("connection", socket => {
   });
 });
 
-// start http server with graphql + socket.io
-const port = process.env.GRAPHQL_LISTEN_PORT;
-httpServer.listen({ port }, () => {
-  console.log(`🚀 Socket.io ready at http://localhost:${port}`);
-  console.log(
-    `🚀 GraphQl ready at http://localhost:${port}${graphQlServer.graphqlPath}`
-  );
-});
+if (require.main === module) {
+  // If called directly:
+  // start http server with graphql + socket.io:
+  const port = process.env.GRAPHQL_LISTEN_PORT;
+  httpServer.listen({ port }, () => {
+    console.log(`🚀 Socket.io ready at http://localhost:${port}`);
+    console.log(
+      `🚀 GraphQl ready at http://localhost:${port}${graphQlServer.graphqlPath}`
+    );
+  });
+} else {
+  // If required as node module:
+  // close existing connections on server close:
+  httpServer.on("close", () => neo4jDriver.close());
+}
+
+export default httpServer;
