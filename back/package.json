@@ -8,8 +8,9 @@
     "dev": "yarn e:dev yarn start:watch",
     "start:watch": "nodemon --watch src --ext js,graphql --exec babel-node src/",
     "db:seed": "yarn e:dev babel-node src/helpers/neo4j/seed.js",
+    "db:purge": "yarn db:seed purge",
     "db:migrate": "yarn e:dev node src/helpers/neo4j/migrate.js",
-    "db:rollback": "yarn e:dev node src/helpers/neo4j/migrate.js down",
+    "db:rollback": "yarn db:migrate down",
     "docker:up": "yarn e:dev docker-compose up",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:stop:all": "docker stop $(docker ps -aq)",
@@ -19,10 +20,6 @@
     "e:test": "dotenv -e .env.test.local -e .env.test -e .env.local -e .env"
   },
   "dependencies": {
-    "apollo-boost": "^0.4.4",
-    "apollo-cache-inmemory": "^1.6.3",
-    "apollo-client": "^2.6.4",
-    "apollo-link-http": "^1.5.15",
     "apollo-server": "^2.8.1",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",

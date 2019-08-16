@@ -1,28 +1,37 @@
-import ApolloClient from "apollo-client";
-import fetch from "node-fetch";
-import gql from "graphql-tag";
-import stoppable from "stoppable";
-import { HttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
+const Umzug = require("umzug");
+const fs = require("fs");
+const path = require("path");
 
-import httpServer from "../../index";
-import addUsersAndTags from "../../../neo4j/seeds/001-addUsersAndTags";
+const execCypher = require("./execCypher");
 
-const server = stoppable(httpServer);
+const command = process.argv[2] || "up";
+const seedsPath = "neo4j/seeds";
+const metaPath = path.resolve(process.cwd(), seedsPath, "meta.json");
 
-const baseUrl = process.env.GRAPHQL_BASE_URL;
-const port = process.env.GRAPHQL_LISTEN_PORT_SEEDS;
-const uri = `${baseUrl}:${port}/graphql`;
-
-const client = new ApolloClient({
-  link: new HttpLink({ uri, fetch }),
-  cache: new InMemoryCache()
+const umzug = new Umzug({
+  migrations: { path: seedsPath },
+  storage: "json",
+  storageOptions: { path: metaPath }
 });
 
-server.listen({ port }, async () => {
-  console.log(`==== Temporary server listening on port ${port}`);
-  console.log(`Running seeds...`);
-  await client.mutate({ mutation: gql(addUsersAndTags) });
-  console.log("=== Closing temporary server");
-  server.stop();
-});
+const h = str => `=== ${str} `.padEnd(50, "=");
+
+const printLog = title => seeds => {
+  if (!seeds.length) return console.log(h("No seeds to run"));
+
+  console.log(h(title));
+  console.log(seeds.map(m => m.file).join("\n"));
+  console.log("".padEnd(50, "="));
+};
+
+switch (command) {
+  case "up":
+    umzug.up().then(printLog("Applied seeds:"));
+    break;
+
+  case "purge":
+    execCypher(`MATCH (n) DETACH DELETE n`)
+      .then(() => fs.writeFileSync(metaPath, "[]"))
+      .catch(console.error);
+    break;
+}

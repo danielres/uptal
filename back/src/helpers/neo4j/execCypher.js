@@ -1,8 +1,8 @@
 const driver = require("./driver");
 
-const execCypher = cypherCommand => async () => {
+const execCypher = async (...args) => {
   const session = driver.session();
-  await session.run(cypherCommand);
+  await session.run(...args);
   session.close(() => driver.close());
 };
 
