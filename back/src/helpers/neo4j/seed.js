@@ -5,9 +5,10 @@ const path = require("path");
 const execCypher = require("./execCypher");
 const { h, hr, log } = require("../log");
 
+const env = process.env.NODE_ENV;
 const command = process.argv[2] || "up";
 const seedsPath = "neo4j/seeds";
-const metaPath = path.resolve(process.cwd(), seedsPath, "meta.json");
+const metaPath = path.resolve(process.cwd(), seedsPath, `meta.${env}.json`);
 
 const umzug = new Umzug({
   migrations: { path: seedsPath },
@@ -16,7 +17,7 @@ const umzug = new Umzug({
 });
 
 const printLog = title => seeds => {
-  if (!seeds.length) return log("No seeds to run");
+  if (!seeds.length) return log(`[${env}] No seeds to run`);
 
   h(title);
   log(seeds.map(m => m.file).join("\n"));
@@ -25,13 +26,13 @@ const printLog = title => seeds => {
 
 switch (command) {
   case "up":
-    umzug.up().then(printLog("Applied seeds:"));
+    umzug.up().then(printLog(`[${env}] Applied seeds:`));
     break;
 
   case "purge":
     execCypher(`MATCH (n) DETACH DELETE n`)
       .then(() => {
-        log("Db purged from all content");
+        log(`[${env}] Db purged from all content`);
         fs.writeFileSync(metaPath, "[]");
       })
       .catch(console.error);

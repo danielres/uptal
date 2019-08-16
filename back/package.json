@@ -11,6 +11,7 @@
     "db:purge": "yarn db:seed purge",
     "db:migrate": "yarn e:dev node src/helpers/neo4j/migrate.js",
     "db:rollback": "yarn db:migrate down",
+    "db:test:respawn": "yarn e:test yarn db:migrate respawn && yarn e:test yarn db:purge",
     "docker:up": "yarn e:dev docker-compose up",
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:stop:all": "docker stop $(docker ps -aq)",
