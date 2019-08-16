@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const execCypher = require("./execCypher");
+const { h, hr, log } = require("../log");
 
 const command = process.argv[2] || "up";
 const seedsPath = "neo4j/seeds";
@@ -14,14 +15,12 @@ const umzug = new Umzug({
   storageOptions: { path: metaPath }
 });
 
-const h = str => `=== ${str} `.padEnd(50, "=");
-
 const printLog = title => seeds => {
-  if (!seeds.length) return console.log(h("No seeds to run"));
+  if (!seeds.length) return log("No seeds to run");
 
-  console.log(h(title));
-  console.log(seeds.map(m => m.file).join("\n"));
-  console.log("".padEnd(50, "="));
+  h(title);
+  log(seeds.map(m => m.file).join("\n"));
+  hr("");
 };
 
 switch (command) {
@@ -31,7 +30,10 @@ switch (command) {
 
   case "purge":
     execCypher(`MATCH (n) DETACH DELETE n`)
-      .then(() => fs.writeFileSync(metaPath, "[]"))
+      .then(() => {
+        log("Db purged from all content");
+        fs.writeFileSync(metaPath, "[]");
+      })
       .catch(console.error);
     break;
 }

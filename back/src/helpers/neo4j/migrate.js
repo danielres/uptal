@@ -1,4 +1,5 @@
 const Umzug = require("umzug");
+const { h, hr, log } = require("../log");
 
 const command = process.argv[2] || "up";
 const path = "neo4j/migrations";
@@ -9,14 +10,12 @@ const umzug = new Umzug({
   storageOptions: { path: `${path}/meta.json` }
 });
 
-const h = str => `=== ${str} `.padEnd(50, "=");
-
 const printLog = title => migrations => {
-  if (!migrations.length) return console.log(h("No migrations to run"));
+  if (!migrations.length) return h("No migrations to run");
 
-  console.log(h(title));
-  console.log(migrations.map(m => m.file).join("\n"));
-  console.log("".padEnd(50, "="));
+  h(title);
+  log(migrations.map(m => m.file).join("\n"));
+  hr();
 };
 
 switch (command) {
