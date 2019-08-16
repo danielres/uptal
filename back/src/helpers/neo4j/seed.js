@@ -5,8 +5,8 @@ import stoppable from "stoppable";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import httpServer from "../index";
-import addUsersAndTags from "./001-addUsersAndTags";
+import httpServer from "../../index";
+import addUsersAndTags from "../../../neo4j/seeds/001-addUsersAndTags";
 
 const server = stoppable(httpServer);
 
