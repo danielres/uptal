@@ -16,6 +16,7 @@
     "docker:reset": "docker-compose down && docker-compose rm -f",
     "docker:stop:all": "docker stop $(docker ps -aq)",
     "start": "npm run build && node build/index.js",
+    "test:api": "yarn e:test -- jest tests/api -- ",
     "build": "babel src -d build; cp .env build; cp src/schema.graphql build",
     "e:dev": "dotenv -e .env.local -e .env",
     "e:test": "dotenv -e .env.test.local -e .env.test -e .env.local -e .env"
@@ -33,12 +34,17 @@
     "umzug": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "dotenv-cli": "^2.0.1",
     "husky": "^3.0.3",
+    "jest": "^24.9.0",
     "lint-staged": "^9.2.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
