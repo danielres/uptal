@@ -2,7 +2,7 @@ const Umzug = require("umzug");
 const fs = require("fs");
 const path = require("path");
 
-const execCypher = require("./execCypher");
+const purgeDb = require("./purgeDb");
 const { h, hr, log } = require("../log");
 
 const env = process.env.NODE_ENV;
@@ -30,7 +30,7 @@ switch (command) {
     break;
 
   case "purge":
-    execCypher(`MATCH (n) DETACH DELETE n`)
+    purgeDb()
       .then(() => {
         log(`[${env}] Db purged from all content`);
         fs.writeFileSync(metaPath, "[]");

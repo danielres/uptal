@@ -1,9 +1,7 @@
 import request from "supertest";
 
 import server from "../../src/index";
-import execCypher from "../../src/helpers/neo4j/execCypher";
-
-const purgeDb = () => execCypher(`MATCH (n) DETACH DELETE n`);
+import purgeDb from "../../src/helpers/neo4j/purgeDb";
 
 beforeEach(purgeDb);
 afterEach(purgeDb);
