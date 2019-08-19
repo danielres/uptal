@@ -8,7 +8,10 @@ import { typeDefs } from "./graphql/schema";
 import neo4jDriver from "./helpers/neo4j/driver";
 
 // create graphql schema
-const schema = makeAugmentedSchema({ typeDefs });
+const schema = makeAugmentedSchema({
+  typeDefs,
+  config: { debug: false }
+});
 
 // setup graphql server & connect with neo4j
 const graphQlServer = new ApolloServer({
