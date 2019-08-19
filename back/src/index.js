@@ -5,6 +5,7 @@ import { ApolloServer } from "apollo-server-express";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
 
 import { typeDefs } from "./graphql/schema";
+import formatError from "./helpers/formatError";
 import neo4jDriver from "./helpers/neo4j/driver";
 
 // create graphql schema
@@ -16,6 +17,7 @@ const schema = makeAugmentedSchema({
 // setup graphql server & connect with neo4j
 const graphQlServer = new ApolloServer({
   context: ({ req }) => ({ driver: neo4jDriver, req }),
+  formatError,
   schema,
   introspection: true,
   playground: true
